@@ -2,6 +2,7 @@ package uz.liti.modbussimulator;
 
 import de.re.easymodbus.exceptions.ModbusException;
 import de.re.easymodbus.modbusclient.ModbusClient;
+import uz.liti.modbussimulator.model.Client;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,6 +16,7 @@ public class ClientTest {
         client.Connect();
         System.out.println(client.isConnected());
         System.out.println(Arrays.toString(client.ReadInputRegisters(0, 2)));
+
 
     }
 }
