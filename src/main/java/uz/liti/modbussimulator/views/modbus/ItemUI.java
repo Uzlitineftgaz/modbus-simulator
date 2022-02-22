@@ -31,8 +31,6 @@ import uz.liti.modbussimulator.repository.ClientRepository;
 import uz.liti.modbussimulator.service.ClientService;
 
 import javax.annotation.security.PermitAll;
-import java.util.ArrayList;
-import java.util.List;
 
 //@Component
 //@Scope("prototype")
@@ -41,7 +39,7 @@ import java.util.List;
 //@PermitAll
 //@EnableScheduling
 @NoArgsConstructor
-
+//@Getter
 public class ItemUI extends VerticalLayout {
 
 //    private final ClientService clientService;
@@ -50,7 +48,7 @@ public class ItemUI extends VerticalLayout {
 
     Grid<ClientItem> itemGrid=new Grid<>(ClientItem.class);
 
-    public Client client;
+    private Client client;
     TextField id=new TextField("id");
     TextField name=new TextField("Name");
     NumberField address=new NumberField("Address");
@@ -60,9 +58,6 @@ public class ItemUI extends VerticalLayout {
     Button saveItemButton = new Button("Add item");
     Button saveButton = new Button("Save");
     Button connectButton=new Button();
-
-
-    List<ClientItem> itemList=new ArrayList<>();
 
 
     private ClientService clientService;
@@ -174,8 +169,7 @@ public class ItemUI extends VerticalLayout {
 //    }
 
     public void updateItemList(){
-        itemList=clientService.findAllItemByClient(client);
-        itemGrid.setItems(itemList);
+        itemGrid.setItems(clientService.findAllItemByClient(client));
     }
 
 
@@ -208,7 +202,5 @@ public class ItemUI extends VerticalLayout {
 //        updateClientList();
     }
 
-    public void refresh() {
-        updateItemList();
-    }
+
 }

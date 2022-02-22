@@ -35,7 +35,7 @@ import javax.annotation.security.PermitAll;
 @Route(value="/client",layout = ModbusLayout.class)
 @PageTitle("Modbus servers")
 @PermitAll
-@EnableScheduling
+//@EnableScheduling
 public class ClientUI extends VerticalLayout {
 
     private final ClientService clientService;
@@ -108,12 +108,12 @@ public class ClientUI extends VerticalLayout {
     }
 
 
-    @Scheduled(fixedRate = 500)
-    public void update(){
-        if (itemUI!=null&&itemUI.client!=null){
-            itemUI.refresh();
-        }
-    }
+//    @Scheduled(fixedRate = 500)
+//    public void update(){
+////        if (itemUI!=null&&itemUI.client!=null){
+////            itemUI.refresh();
+////        }
+//    }
 
     private void configureGrid() {
         gridClient.addClassName("client-grid");
