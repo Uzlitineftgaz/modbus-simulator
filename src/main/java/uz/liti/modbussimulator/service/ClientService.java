@@ -6,6 +6,9 @@ import uz.liti.modbussimulator.model.ClientItem;
 import uz.liti.modbussimulator.repository.ClientItemRepository;
 import uz.liti.modbussimulator.repository.ClientRepository;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class ClientService {
 
@@ -18,10 +21,35 @@ public class ClientService {
         this.clientItemRepository = clientItemRepository;
     }
 
+
+
+    public boolean save(Client client){
+        try {
+            clientRepository.save(client);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+
+    public boolean saveItem(ClientItem item){
+        try {
+            clientItemRepository.save(item);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+
+
+
+
     public void test(){
         var client = Client
                 .builder()
-                .ipAddress("10.10.24.50")
+                .ip("10.10.24.50")
                 .port(502)
                 .name("Test")
                 .connectionTimeout(500)
@@ -51,5 +79,15 @@ public class ClientService {
 
 
     }
+
+
+
+    public List<ClientItem> findAllItemByClient(Client client){
+        return clientItemRepository.findAllByClient(client);
+    }
+//
+//    public Map<Boolean,String> check(Client client){
+//
+//    }
 
 }

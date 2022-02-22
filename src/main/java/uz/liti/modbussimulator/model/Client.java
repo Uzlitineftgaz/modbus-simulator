@@ -4,10 +4,7 @@ import de.re.easymodbus.exceptions.ModbusException;
 import de.re.easymodbus.modbusclient.ModbusClient;
 import de.re.easymodbus.modbusclient.ReceiveDataChangedListener;
 import de.re.easymodbus.modbusclient.SendDataChangedListener;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.IOException;
@@ -18,6 +15,7 @@ import java.net.UnknownHostException;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Client {
 
     @Id
@@ -27,27 +25,38 @@ public class Client {
     @Column(unique = true)
     private String name;
 
-    private String ipAddress;
+    private String ip;
     private int port;
     private int connectionTimeout = 500;
+    private boolean active=false;
 
     @Transient
     private ModbusClient modbusClient=new ModbusClient();
 
+//    @Builder
+//    public Client(Long id, String name, String ipAddress, int port, int connectionTimeout) {
+//        this.id = id;
+//        this.name = name;
+//        this.ipAddress = ipAddress;
+//        this.port = port;
+//        this.connectionTimeout = connectionTimeout;
+//    }
+
     @Builder
-    public Client(Long id, String name, String ipAddress, int port, int connectionTimeout) {
+    public Client(Long id, String name, String ip, int port, int connectionTimeout, boolean active) {
         this.id = id;
         this.name = name;
-        this.ipAddress = ipAddress;
+        this.ip = ip;
         this.port = port;
         this.connectionTimeout = connectionTimeout;
+        this.active = active;
     }
 
     public Client Connect(){
         try {
             modbusClient.setPort(port);
             modbusClient.setConnectionTimeout(connectionTimeout);
-            modbusClient.setipAddress(ipAddress);
+            modbusClient.setipAddress(ip);
             modbusClient.Connect();
             return this;
         }catch (Exception e){
