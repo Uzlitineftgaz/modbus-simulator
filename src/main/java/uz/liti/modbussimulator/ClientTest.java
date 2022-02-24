@@ -2,6 +2,7 @@ package uz.liti.modbussimulator;
 
 import de.re.easymodbus.exceptions.ModbusException;
 import de.re.easymodbus.modbusclient.ModbusClient;
+import de.re.easymodbus.server.ModbusServer;
 import uz.liti.modbussimulator.model.Client;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class ClientTest {
 //        System.out.println(Arrays.toString(client.ReadInputRegisters(0, 2)));
 
 
+
         ModbusClient client=new ModbusClient();
         client.setPort(502);
         client.setipAddress("10.10.24.50");
@@ -25,8 +27,10 @@ public class ClientTest {
         client.Connect();
         System.out.println(client.isConnected());
 //        System.out.println(Arrays.toString(client.ReadInputRegisters(512, 2)));
-        int[] ints = client.ReadHoldingRegisters(0x20c, 2);
+        int[] ints = client.ReadHoldingRegisters(0x214, 2);
         int[] p={0,0};
+
+
 
 //            int[] ints2 = this.client.getModbusClient().ReadInputRegisters(address, 4);
 //            double s = ModbusClient.ConvertRegistersToDoublePrecisionFloat(ints2);
@@ -36,8 +40,16 @@ public class ClientTest {
         while (true){
             System.out.println(ModbusClient.ConvertRegistersToFloat(ints, ModbusClient.RegisterOrder.HighLow));
 
-            client.WriteSingleRegister(524,3);
-            client.WriteSingleRegister(525,3);
+            System.out.println(Arrays.toString(ints));
+
+
+
+            client.WriteSingleRegister(0x214,1234);
+            client.WriteSingleRegister(0x215,0);
+            client.WriteSingleRegister(0x216,0);
+//            client.WriteSingleRegister(0x217,0);
+            System.out.println(Arrays.toString(client.ReadHoldingRegisters(0x214, 2)));
+//            client.WriteMultipleCoils(0x210,new boolean[]{true,true});
             client.Connect();
 
 //
