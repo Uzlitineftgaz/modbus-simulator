@@ -27,9 +27,13 @@ public class Test {
 
         modbusServer.holdingRegisters[1] = 1234;
         modbusServer.inputRegisters[1]=199;
+        modbusServer.inputRegisters[65534]=199;
+
+//        modbusServer.
 
         try {
             modbusServer.Listen();
+            System.out.println(Arrays.stream(modbusServer.inputRegisters).count());
             System.out.println(Arrays.toString(new int[]{modbusServer.inputRegisters[1]}));
             System.out.println(Arrays.toString(new int[]{modbusServer.holdingRegisters[1]}));
 

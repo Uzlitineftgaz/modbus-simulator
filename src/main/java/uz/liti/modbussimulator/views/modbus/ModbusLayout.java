@@ -8,7 +8,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.HighlightConditions;
 import com.vaadin.flow.router.RouterLink;
-import uz.liti.modbussimulator.views.list.ListView;
+//import uz.liti.modbussimulator.views.list.ListView;
 
 public class ModbusLayout extends AppLayout {
 

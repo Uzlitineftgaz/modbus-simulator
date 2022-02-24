@@ -1,5 +1,6 @@
 package uz.liti.modbussimulator.service;
 
+import de.re.easymodbus.server.ModbusServer;
 import org.springframework.stereotype.Service;
 import uz.liti.modbussimulator.model.Client;
 import uz.liti.modbussimulator.model.ClientItem;
@@ -47,27 +48,56 @@ public class ClientService {
 
 
     public void test(){
+
+
+        var server= new ModbusServer();
+
+        server.setPort(9090);
+        server.setName("Alkash");
+        server.inputRegisters[0]=123;
+        server.inputRegisters[1]=231;
+        System.out.println(server.getServerRunning());
+        server.start();
+
+//        var client = Client
+//                .builder()
+//                .ip("10.10.24.50")
+//                .port(502)
+//                .name("Test")
+//                .connectionTimeout(500)
+//                .build();
+//        client=clientRepository.save(client);
+//
+//        var clientItem=ClientItem
+//                .builder()
+//                .address(0x200)
+//                .quantity(2)
+//                .name("item")
+//                .client(client)
+//                .build();
+//        clientItem=clientItemRepository.save(clientItem);
         var client = Client
                 .builder()
-                .ip("10.10.24.50")
-                .port(502)
-                .name("Test")
+                .ip("192.168.1.43")
+                .port(9090)
+                .name("lknklnlk")
                 .connectionTimeout(500)
                 .build();
-        client=clientRepository.save(client);
+//        client=clientRepository.save(client);
 
         var clientItem=ClientItem
                 .builder()
-                .address(0x200)
+                .address(0)
                 .quantity(2)
-                .name("item")
+                .name("khkhkjj")
                 .client(client)
                 .build();
-        clientItem=clientItemRepository.save(clientItem);
+//        clientItem=clientItemRepository.save(clientItem);
 
         System.out.println("AAAAAAAAAAAA");
-        System.out.println(clientItem.getFloatHighLow());
+        System.out.println(clientItem.getValue());
 
+        server.stop();
 //
 //        try {
 //            client.Connect();

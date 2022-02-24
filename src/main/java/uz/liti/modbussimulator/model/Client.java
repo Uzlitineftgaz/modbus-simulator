@@ -1,15 +1,11 @@
 package uz.liti.modbussimulator.model;
 
-import de.re.easymodbus.exceptions.ModbusException;
 import de.re.easymodbus.modbusclient.ModbusClient;
-import de.re.easymodbus.modbusclient.ReceiveDataChangedListener;
-import de.re.easymodbus.modbusclient.SendDataChangedListener;
+
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.IOException;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+
 
 @Entity
 @NoArgsConstructor

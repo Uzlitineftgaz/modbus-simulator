@@ -33,7 +33,7 @@ import javax.annotation.security.PermitAll;
 @Component
 @Scope("prototype")
 @Route(value="/client",layout = ModbusLayout.class)
-@PageTitle("Modbus servers")
+@PageTitle("Modbus clients")
 @PermitAll
 //@EnableScheduling
 public class ClientUI extends VerticalLayout {
@@ -56,6 +56,9 @@ public class ClientUI extends VerticalLayout {
 
     ItemUI itemUI=new ItemUI();
 
+    Button back=new Button("Back");
+
+
 
     Binder<Client> clientBinder=new BeanValidationBinder<>(Client.class);
 
@@ -71,14 +74,8 @@ public class ClientUI extends VerticalLayout {
 
 //        this.itemUI = itemUI;
 
-        addClassName("list-view");
-        setSizeFull();
-
         configureGrid();
 
-        HorizontalLayout layout = new HorizontalLayout(gridClient);
-        layout.setSizeFull();
-        add(getAddClientForm("Add modbus client"),layout);
     }
 
 
@@ -116,6 +113,13 @@ public class ClientUI extends VerticalLayout {
 //    }
 
     private void configureGrid() {
+        addClassName("list-view");
+        setSizeFull();
+
+
+        HorizontalLayout layout = new HorizontalLayout(gridClient);
+        layout.setSizeFull();
+        add(getAddClientForm("Add modbus client"),layout);
         gridClient.addClassName("client-grid");
         gridClient.setSizeFull();
 //        gridClient.setWidthFull();
@@ -138,7 +142,12 @@ public class ClientUI extends VerticalLayout {
 
     private void getItems(Client client) {
         removeAll();
-        itemUI = new ItemUI(clientService, clientRepository, client);
+        back.addClickListener(e->{
+            removeAll();
+            dialog.removeAll();
+            configureGrid();
+        });
+        itemUI = new ItemUI(clientService, clientRepository, client,back);
 
         add(itemUI);
     }

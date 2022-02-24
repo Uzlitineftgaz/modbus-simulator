@@ -18,6 +18,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.NativeButtonRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLink;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -55,6 +56,10 @@ public class ItemUI extends VerticalLayout {
     NumberField quantity=new NumberField("Quantity");
     Dialog dialog = new Dialog();
 
+
+    Button refresh=new Button("Refresh");
+    Button back;
+
     Button saveItemButton = new Button("Add item");
     Button saveButton = new Button("Save");
     Button connectButton=new Button();
@@ -63,9 +68,9 @@ public class ItemUI extends VerticalLayout {
     private ClientService clientService;
 
 
-    public ItemUI(ClientService clientService, ClientRepository clientRepository,Client client) {
-
-
+    public ItemUI(ClientService clientService, ClientRepository clientRepository,Client client,Button back) {
+        this.back=back;
+//        back.addClickListener(e->removeAll());
         this.clientService=clientService;
         itemGrid.setItems(clientService.findAllItemByClient(client));
         configureGrid();
@@ -91,8 +96,17 @@ public class ItemUI extends VerticalLayout {
 
         this.client=client;
 
+
+        HorizontalLayout backrefresh = new HorizontalLayout();
+        HorizontalLayout backrefresh2 = new HorizontalLayout();
+        backrefresh.add(back,refresh);
+
+        refresh.addClickListener(e->updateItemList());
+
+
+        backrefresh2.add(paragraph,saveItemButton,connectButton);
         saveItemButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        add(new HorizontalLayout(paragraph,saveItemButton,connectButton),layout);
+        add(new HorizontalLayout(backrefresh,paragraph,saveItemButton,connectButton),layout);
 
     }
 
