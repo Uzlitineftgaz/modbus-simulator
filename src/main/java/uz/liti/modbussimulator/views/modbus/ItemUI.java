@@ -23,6 +23,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -41,6 +43,7 @@ import javax.annotation.security.PermitAll;
 //@EnableScheduling
 @NoArgsConstructor
 //@Getter
+@EnableAsync
 public class ItemUI extends VerticalLayout {
 
 //    private final ClientService clientService;
@@ -141,6 +144,7 @@ public class ItemUI extends VerticalLayout {
         return dialogLayout;
     }
 
+    @Async
     private void addItem() {
         System.out.println();
         System.out.println(name.getValue());

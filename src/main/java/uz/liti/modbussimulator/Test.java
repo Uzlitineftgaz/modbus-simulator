@@ -22,12 +22,15 @@ public class Test {
 
 //Note that Standard Port for Modbus TCP communication is 502
 
+
+
         modbusServer.coils[1] = true;
 
 
-        modbusServer.holdingRegisters[1] = 1234;
-        modbusServer.inputRegisters[1]=199;
-        modbusServer.inputRegisters[65534]=199;
+        modbusServer.holdingRegisters[1] = 16710;
+        modbusServer.holdingRegisters[2] = 26214;
+        modbusServer.inputRegisters[1]=16710;
+        modbusServer.inputRegisters[2]=26214;
 
 //        modbusServer.
 
@@ -36,6 +39,7 @@ public class Test {
             System.out.println(Arrays.stream(modbusServer.inputRegisters).count());
             System.out.println(Arrays.toString(new int[]{modbusServer.inputRegisters[1]}));
             System.out.println(Arrays.toString(new int[]{modbusServer.holdingRegisters[1]}));
+            System.out.println(Arrays.toString(modbusServer.getLogData()));
 
         }
         catch (java.io.IOException e) {

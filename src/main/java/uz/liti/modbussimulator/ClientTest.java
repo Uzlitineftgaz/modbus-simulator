@@ -21,43 +21,41 @@ public class ClientTest {
 
 
         ModbusClient client=new ModbusClient();
-        client.setPort(502);
-        client.setipAddress("10.10.24.50");
+        client.setPort(1522);
+        client.setipAddress("127.0.0.1");
         client.setConnectionTimeout(500);
         client.Connect();
         System.out.println(client.isConnected());
 //        System.out.println(Arrays.toString(client.ReadInputRegisters(512, 2)));
-        int[] ints = client.ReadHoldingRegisters(0x214, 2);
+        int[] ints = client.ReadInputRegisters(0, 2);
         int[] p={0,0};
 
 
-
-//            int[] ints2 = this.client.getModbusClient().ReadInputRegisters(address, 4);
-//            double s = ModbusClient.ConvertRegistersToDoublePrecisionFloat(ints2);
-//            System.out.println("SSSSSSSSSSSSSSSSS "+s);
-
-//        client.WriteSingleRegister();
-        while (true){
-            System.out.println(ModbusClient.ConvertRegistersToFloat(ints, ModbusClient.RegisterOrder.HighLow));
-
-            System.out.println(Arrays.toString(ints));
+        System.out.println(Arrays.toString(ints));
+        System.out.println(ModbusClient.ConvertRegistersToFloat(ints, ModbusClient.RegisterOrder.HighLow));
 
 
-
-            client.WriteSingleRegister(0x214,1234);
-            client.WriteSingleRegister(0x215,0);
-            client.WriteSingleRegister(0x216,0);
-//            client.WriteSingleRegister(0x217,0);
-            System.out.println(Arrays.toString(client.ReadHoldingRegisters(0x214, 2)));
-//            client.WriteMultipleCoils(0x210,new boolean[]{true,true});
-            client.Connect();
-
+//        while (true){
+//            System.out.println(ModbusClient.ConvertRegistersToFloat(ints, ModbusClient.RegisterOrder.HighLow));
 //
-//            System.out.println(ModbusClient.ConvertRegistersToFloat(client.ReadWriteMultipleRegisters(0x20c,2,0x20c,p), ModbusClient.RegisterOrder.HighLow));
-            System.out.println(ModbusClient.ConvertRegistersToFloat(ints, ModbusClient.RegisterOrder.HighLow));
-
-            Thread.sleep(1000);
-        }
+//            System.out.println(Arrays.toString(ints));
+//
+////
+////
+////            client.WriteSingleRegister(0x214,1234);
+////            client.WriteSingleRegister(0x215,0);
+////            client.WriteSingleRegister(0x216,0);
+//////            client.WriteSingleRegister(0x217,0);
+////            System.out.println(Arrays.toString(client.ReadHoldingRegisters(0x214, 2)));
+////            client.WriteMultipleCoils(0x210,new boolean[]{true,true});
+//            client.Connect();
+//
+////
+////            System.out.println(ModbusClient.ConvertRegistersToFloat(client.ReadWriteMultipleRegisters(0x20c,2,0x20c,p), ModbusClient.RegisterOrder.HighLow));
+//            System.out.println(ModbusClient.ConvertRegistersToFloat(ints, ModbusClient.RegisterOrder.HighLow));
+//
+//            Thread.sleep(1000);
+//        }
 
 
     }
