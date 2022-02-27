@@ -6,8 +6,6 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -134,7 +132,7 @@ public class ClientUI extends VerticalLayout {
 
         gridClient.addColumn(new NativeButtonRenderer<>("Edit", this::editForm)).setHeader("Edit");
         gridClient.addColumn(new NativeButtonRenderer<>("Items", this::getItems)).setHeader("Items");
-        gridClient.addColumn(new NativeButtonRenderer<>("Delete", clickedItem -> {})).setHeader("Delete");
+        gridClient.addColumn(new NativeButtonRenderer<>("Delete", this::deleteClient)).setHeader("Delete");
 //        gridClient.addColumn(new NativeButtonRenderer<>("Delete", clickedItem -> {})).setHeader("Delete");
         updateClientList();
 //        gridClient.asSingleSelect().addValueChangeListener(e->editContact(e.getValue()));
@@ -209,18 +207,13 @@ public class ClientUI extends VerticalLayout {
 
         System.out.println(client);
 
-        Notification notification=new Notification();
-        notification.setDuration(1000);
+
         if (clientService.save(client)){
-            notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-            notification.setText("Saved");
-            notification.open();
+            Utils.notificationSuccess("Saved");
             updateClientList();
         }
         else {
-            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-            notification.setText("Error");
-            notification.open();
+            Utils.notificationError();
         }
     }
 
@@ -243,27 +236,21 @@ public class ClientUI extends VerticalLayout {
         dialog.open();
 
 
-//        System.out.println();
-//        System.out.println(name.getValue());
-//
-//
-//        Notification notification=new Notification();
-//        notification.setDuration(1000);
-//        if (clientService.save(client)){
-//            notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-//            notification.setText("Saved");
-//            notification.open();
-//            updateClientList();
-//        }
-//        else {
-//            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-//            notification.setText("Error");
-//            notification.open();
-//        }
     }
 
 
 
+    public void deleteClient(Client client){
+
+        try {
+            clientService.deleteClient(client);
+            Utils.notificationSuccess("Deleted");
+            updateClientList();
+        }catch (Exception e){
+            e.printStackTrace();
+            Utils.notificationError();
+        }
+    }
 
 
 }

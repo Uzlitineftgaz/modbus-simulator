@@ -6,8 +6,6 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -18,12 +16,16 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import uz.liti.modbussimulator.model.Register;
 import uz.liti.modbussimulator.model.Server;
 import uz.liti.modbussimulator.repository.ServerRepository;
 import uz.liti.modbussimulator.service.ServerService;
 
 import javax.annotation.security.PermitAll;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 @Scope("prototype")
@@ -63,7 +65,7 @@ public class ServerUI extends VerticalLayout {
             ServerService service, ServerRepository serverRepository) {
         this.service = service;
         this.serverRepository = serverRepository;
-
+        registerUI=new RegisterUI(service);
 
 //        this.itemUI = itemUI;
 
@@ -76,7 +78,11 @@ public class ServerUI extends VerticalLayout {
 
 
     public void updateClientList(){
-        gridServer.setItems(serverRepository.findAll());
+        List<Server> servers = serverRepository.findAll();
+//        servers.forEach(s->{
+//            System.out.println(s.getRegisterMap());
+//        });
+        gridServer.setItems(servers);
     }
 
     public HorizontalLayout getAddClientForm(String title){
@@ -112,7 +118,7 @@ public class ServerUI extends VerticalLayout {
         addClassName("list-view");
         setSizeFull();
 
-        registerUI=new RegisterUI(service);
+
 
 //        HorizontalLayout layout = new HorizontalLayout(gridServer);
 //        layout.setSizeFull();
@@ -238,22 +244,24 @@ public class ServerUI extends VerticalLayout {
                 .port(port.getValue().intValue())
                 .build();
 
+
+
+
+//        Map<Integer,Short> map=new HashMap<>();
+//        map.put(12, (short) 32);
+//        server.setRegisterMap(map);
+
         if (id.getValue()!=null&&!id.getValue().isEmpty()) server.setId(Long.valueOf(id.getValue()));
 
         System.out.println(server);
 
-        Notification notification=new Notification();
-        notification.setDuration(1000);
+
         if (service.save(server)){
-            notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-            notification.setText("Saved");
-            notification.open();
+            Utils.notificationSuccess("Saved");
             updateClientList();
         }
         else {
-            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-            notification.setText("Error");
-            notification.open();
+            Utils.notificationError();
         }
     }
 

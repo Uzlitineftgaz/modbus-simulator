@@ -1,5 +1,6 @@
 package uz.liti.modbussimulator.service;
 
+import de.re.easymodbus.modbusclient.ModbusClient;
 import de.re.easymodbus.server.ModbusServer;
 import org.springframework.stereotype.Service;
 import uz.liti.modbussimulator.model.Client;
@@ -21,6 +22,8 @@ public class ClientService {
         this.clientRepository = clientRepository;
         this.clientItemRepository = clientItemRepository;
     }
+
+
 
 
 
@@ -111,6 +114,9 @@ public class ClientService {
     }
 
 
+    public void deleteClient(Client client){
+        clientRepository.delete(client);
+    }
 
     public List<ClientItem> findAllItemByClient(Client client){
         return clientItemRepository.findAllByClient(client);

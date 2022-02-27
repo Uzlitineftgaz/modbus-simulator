@@ -2,6 +2,7 @@ package uz.liti.modbussimulator.model;
 
 import de.re.easymodbus.modbusclient.ModbusClient;
 
+import de.re.easymodbus.server.ModbusServer;
 import lombok.*;
 
 import javax.persistence.*;
@@ -50,6 +51,8 @@ public class Client {
 
     public Client Connect(){
         try {
+            System.out.println(ModbusServer.getAllStackTraces());
+
             modbusClient.setPort(port);
             modbusClient.setConnectionTimeout(connectionTimeout);
             modbusClient.setipAddress(ip);

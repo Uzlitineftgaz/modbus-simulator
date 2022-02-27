@@ -5,6 +5,7 @@ import de.re.easymodbus.server.ModbusServer;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Map;
 
 @Entity
 @NoArgsConstructor
@@ -24,6 +25,14 @@ public class Server {
     private int connectionTimeout = 500;
     private boolean active=false;
 
+
+
+//    @ElementCollection
+//    @CollectionTable(name = "register_mapping",
+//            joinColumns = {@JoinColumn(name = "server_id", referencedColumnName = "id")})
+//    @MapKeyColumn(name = "address")
+//    @Column(name = "registers")
+//    private Map<Integer, Short> registerMap;
 
     @Transient
     private ModbusServer modbusServer=new ModbusServer();

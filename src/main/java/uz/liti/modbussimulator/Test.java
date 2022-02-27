@@ -31,6 +31,7 @@ public class Test {
         modbusServer.holdingRegisters[2] = 26214;
         modbusServer.inputRegisters[1]=16710;
         modbusServer.inputRegisters[2]=26214;
+//        modbusServer.
 
 //        modbusServer.
 
@@ -39,6 +40,7 @@ public class Test {
             System.out.println(Arrays.stream(modbusServer.inputRegisters).count());
             System.out.println(Arrays.toString(new int[]{modbusServer.inputRegisters[1]}));
             System.out.println(Arrays.toString(new int[]{modbusServer.holdingRegisters[1]}));
+            System.out.println(modbusServer.holdingRegisters.length);
             System.out.println(Arrays.toString(modbusServer.getLogData()));
 
         }
