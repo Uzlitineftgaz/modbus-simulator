@@ -27,7 +27,8 @@ public class ClientItem {
     public float getValue(){
         try {
             Client client = this.client.Connect();
-            int[] ints = this.client.getModbusClient().ReadInputRegisters(address+1, quantity);
+            if (client==null) return 0;
+            int[] ints = this.client.getModbusClient().ReadInputRegisters(address, quantity);
 //            int[] ints2 = this.client.getModbusClient().ReadInputRegisters(address, 4);
 //            double s = ModbusClient.ConvertRegistersToDoublePrecisionFloat(ints2);
 //            System.out.println("SSSSSSSSSSSSSSSSS "+s);

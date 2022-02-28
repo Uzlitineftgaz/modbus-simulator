@@ -47,25 +47,25 @@ public class ServerService {
             short[] shorts=floatToTwoInt16(value);
 
 
-            register.setValue((short) 0);
+            register.setValue(shorts[0]);
             Register register1= Register
                     .builder()
                     .address(register.getAddress()+1)
                     .server(register.getServer())
                     .type(RegisterType.INPUT_REGISTER)
-                    .value((short) 0)
+                    .value(shorts[1])
                     .build();
             Register register2= Register
                     .builder()
                     .server(register.getServer())
-                    .value(shorts[0])
+                    .value((short) 0)
                     .type(RegisterType.INPUT_REGISTER)
                     .address(register.getAddress()+2)
                     .build();
             Register register3= Register
                     .builder()
                     .server(register.getServer())
-                    .value(shorts[1])
+                    .value((short) 0)
                     .type(RegisterType.INPUT_REGISTER)
                     .address(register.getAddress()+3)
                     .build();
@@ -98,6 +98,7 @@ public class ServerService {
 
 
     public static float twoInt16ToFloat(short[] array){
+        float v = Float.intBitsToFloat(twoInt16ToInt32(array));
         return Float.intBitsToFloat(twoInt16ToInt32(array));
     }
 
@@ -122,22 +123,22 @@ public class ServerService {
 
     public void updateServers(Register register,List<Register> children){
         try {
-
-
             for (ModbusServer s:serverList) {
                 if (s.getPort()==register.getServer().getPort()){
-                    s.inputRegisters[register.getAddress()+1]=children.get(0).getValue();
-                    s.inputRegisters[register.getAddress()+2]=children.get(1).getValue();
-                    s.inputRegisters[register.getAddress()+3]=children.get(2).getValue();
+                    s.inputRegisters[register.getAddress()+1]=register.getValue();
+                    s.inputRegisters[register.getAddress()+2]=children.get(0).getValue();
+                    s.inputRegisters[register.getAddress()+3]=children.get(1).getValue();
+                    s.inputRegisters[register.getAddress()+4]=children.get(2).getValue();
                     s.start();
                     return;
                 }
             }
             ModbusServer server=new ModbusServer();
             server.setPort(register.getServer().getPort());
-            server.inputRegisters[register.getAddress()+1]=children.get(0).getValue();
-            server.inputRegisters[register.getAddress()+2]=children.get(1).getValue();
-            server.inputRegisters[register.getAddress()+3]=children.get(2).getValue();
+            server.inputRegisters[register.getAddress()+1]=register.getValue();
+            server.inputRegisters[register.getAddress()+2]=children.get(0).getValue();
+            server.inputRegisters[register.getAddress()+3]=children.get(1).getValue();
+            server.inputRegisters[register.getAddress()+4]=children.get(2).getValue();
             server.start();
             server.Listen();
             serverList.add(server);

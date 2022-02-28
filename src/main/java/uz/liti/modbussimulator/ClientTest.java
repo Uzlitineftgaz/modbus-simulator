@@ -22,25 +22,29 @@ public class ClientTest {
 
         ModbusClient client=new ModbusClient();
         client.setPort(502);
-        client.setipAddress("10.10.24.50");
+        client.setipAddress("10.10.24.49");
         client.setConnectionTimeout(500);
         client.Connect();
         System.out.println(client.isConnected());
 //        System.out.println(Arrays.toString(client.ReadInputRegisters(512, 2)));
-        int[] aaa = client.ReadInputRegisters(512, 2);
+        int[] aaa = client.ReadInputRegisters(4, 2);
+        int[] aaa2 = client.ReadInputRegisters(512, 4);
         int[] ints = client.ReadInputRegisters(0x200, 2);
         int[] ints2 = client.ReadInputRegisters(0x201, 2);
+        int[] ints3 = client.ReadInputRegisters(0x202, 2);
         int[] p={0,0};
 
 
         System.out.println(Arrays.toString(aaa));
-        System.out.println(ModbusClient.ConvertRegistersToFloat(aaa, ModbusClient.RegisterOrder.HighLow));
+        System.out.println(Arrays.toString(aaa2));
+//        System.out.println(ModbusClient.ConvertRegistersToFloat(aaa, ModbusClient.RegisterOrder.HighLow));
 
         System.out.println(Arrays.toString(ints));
-        System.out.println(ModbusClient.ConvertRegistersToFloat(ints, ModbusClient.RegisterOrder.HighLow));
+//        System.out.println(ModbusClient.ConvertRegistersToFloat(ints, ModbusClient.RegisterOrder.HighLow));
 
         System.out.println(Arrays.toString(ints2));
-        System.out.println(ModbusClient.ConvertRegistersToFloat(ints2, ModbusClient.RegisterOrder.HighLow));
+        System.out.println(Arrays.toString(ints3));
+//        System.out.println(ModbusClient.ConvertRegistersToFloat(ints2, ModbusClient.RegisterOrder.HighLow));
 //        while (true){
 //            System.out.println(ModbusClient.ConvertRegistersToFloat(ints, ModbusClient.RegisterOrder.HighLow));
 //

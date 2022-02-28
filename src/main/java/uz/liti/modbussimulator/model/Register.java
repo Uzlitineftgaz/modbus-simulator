@@ -8,11 +8,12 @@ import uz.liti.modbussimulator.service.ServerService;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 @Entity
-@Table(   uniqueConstraints = {@UniqueConstraint(columnNames = {"server_id", "address"})})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"server_id", "address"})})
 @NoArgsConstructor
 @Getter
 @Setter
@@ -59,7 +60,8 @@ public class Register {
 
     public float getFloatValue(){
         if (id!=null&&address!=null&&address%4==0&&children.size()==3){
-            return ServerService.twoInt16ToFloat(helper(children));
+            float v = ServerService.twoInt16ToFloat(helper(children));
+            return v;
         }
         return 0;
     }
@@ -67,8 +69,11 @@ public class Register {
     private short[] helper(List<Register> children){
         short[] result=new short[2];
         try {
-            result[0]=children.stream().filter(c->c.address==address+2).findFirst().get().getValue();
-            result[1]=children.stream().filter(c->c.address==address+3).findFirst().get().getValue();
+            result[0]=getValue();
+            result[1]=children.stream().filter(c->c.address==address+1).findFirst().get().getValue();
+//            result[0]=children.stream().filter(c->c.address==address+2).findFirst().get().getValue();
+//            result[1]=children.stream().filter(c->c.address==address+3).findFirst().get().getValue();
+            System.out.println(Arrays.toString(result));
         }catch (Exception e){
             e.printStackTrace();
         }
