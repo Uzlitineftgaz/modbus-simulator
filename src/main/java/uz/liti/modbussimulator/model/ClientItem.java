@@ -1,7 +1,7 @@
 package uz.liti.modbussimulator.model;
 
-import de.re.easymodbus.modbusclient.ModbusClient;
 import lombok.*;
+import uz.maniac4j.modbus.client.ModbusClient;
 
 import javax.persistence.*;
 

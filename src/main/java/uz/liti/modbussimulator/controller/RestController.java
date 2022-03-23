@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uz.liti.modbussimulator.service.ClientService;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 @CrossOrigin
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api")
@@ -25,5 +29,13 @@ public class RestController {
         return ResponseEntity.ok("ok");
     }
 
+    @GetMapping("/value")
+    public HttpEntity<?> value(){
+//        System.out.println();
+//        clientService.test();
+        Map<String,Float> value=new HashMap<>();
+        value.put("item",new Random().nextFloat()*10);
+        return ResponseEntity.ok(value);
+    }
 
 }

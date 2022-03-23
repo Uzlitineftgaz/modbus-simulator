@@ -1,9 +1,9 @@
 package uz.liti.modbussimulator.model;
 
-import de.re.easymodbus.modbusclient.ModbusClient;
 
-import de.re.easymodbus.server.ModbusServer;
 import lombok.*;
+import uz.maniac4j.modbus.client.ModbusClient;
+import uz.maniac4j.modbus.server.ModbusServer;
 
 import javax.persistence.*;
 
@@ -55,7 +55,7 @@ public class Client {
 
             modbusClient.setPort(port);
             modbusClient.setConnectionTimeout(connectionTimeout);
-            modbusClient.setipAddress(ip);
+            modbusClient.setIpAddress(ip);
             modbusClient.Connect();
             return this;
         }catch (Exception e){

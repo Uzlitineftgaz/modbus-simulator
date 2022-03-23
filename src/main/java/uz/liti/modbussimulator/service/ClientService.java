@@ -1,12 +1,12 @@
 package uz.liti.modbussimulator.service;
 
-import de.re.easymodbus.modbusclient.ModbusClient;
-import de.re.easymodbus.server.ModbusServer;
+
 import org.springframework.stereotype.Service;
 import uz.liti.modbussimulator.model.Client;
 import uz.liti.modbussimulator.model.ClientItem;
 import uz.liti.modbussimulator.repository.ClientItemRepository;
 import uz.liti.modbussimulator.repository.ClientRepository;
+import uz.maniac4j.modbus.server.ModbusServer;
 
 import java.util.List;
 import java.util.Map;

@@ -1,8 +1,8 @@
 package uz.liti.modbussimulator.model;
 
-import de.re.easymodbus.modbusclient.ModbusClient;
-import de.re.easymodbus.server.ModbusServer;
+
 import lombok.*;
+import uz.maniac4j.modbus.server.ModbusServer;
 
 import javax.persistence.*;
 import java.util.Map;

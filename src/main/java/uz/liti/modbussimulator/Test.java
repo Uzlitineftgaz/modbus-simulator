@@ -1,7 +1,7 @@
 package uz.liti.modbussimulator;
 
 
-import de.re.easymodbus.server.ModbusServer;
+import uz.maniac4j.modbus.server.ModbusServer;
 
 import java.util.Arrays;
 
