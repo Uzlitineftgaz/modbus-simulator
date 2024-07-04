@@ -6,7 +6,7 @@ import uz.liti.modbussimulator.model.RegisterType;
 import uz.liti.modbussimulator.model.Server;
 import uz.liti.modbussimulator.repository.RegisterRepository;
 import uz.liti.modbussimulator.repository.ServerRepository;
-import uz.maniac4j.modbus.server.ModbusServer;
+import uz.liti.modbussimulator.storm.modbus.server.ModbusServer;
 
 import java.util.ArrayList;
 import java.util.HashSet;

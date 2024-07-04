@@ -3,7 +3,7 @@ package uz.liti.modbussimulator.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import uz.liti.modbussimulator.service.ServerService;
-import uz.maniac4j.modbus.server.ModbusServer;
+import uz.liti.modbussimulator.storm.modbus.server.ModbusServer;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;

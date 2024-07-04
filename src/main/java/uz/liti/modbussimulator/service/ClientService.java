@@ -6,7 +6,7 @@ import uz.liti.modbussimulator.model.Client;
 import uz.liti.modbussimulator.model.ClientItem;
 import uz.liti.modbussimulator.repository.ClientItemRepository;
 import uz.liti.modbussimulator.repository.ClientRepository;
-import uz.maniac4j.modbus.server.ModbusServer;
+import uz.liti.modbussimulator.storm.modbus.server.ModbusServer;
 
 import java.util.List;
 import java.util.Map;
